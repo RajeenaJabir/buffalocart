@@ -49,4 +49,31 @@ public class LoginPageTest extends Base {
         extentTest.get().log(Status.PASS, "user logged in successfully");
     }
 
+    @Test(priority = 3,description = "TC_003_Verify the error message displayed for user login with invalid credentials")
+    public void verifyUserLoginWithInValidUserCredentials(){
+        login = new LoginPage(driver);
+        List<List<String>> data=excel.excelDataReader("LoginPage");
+        String uname=data.get(2).get(1);
+        login.enterUserName(uname);
+        String psd=data.get(2).get(2);
+        login.enterPassword(psd);
+        home=login.clickOnLoginButton();
+        String actualErrorMessage=login.getErrorMessage();
+        String expectedUserAccountName=data.get(1).get(4);
+        Assert.assertEquals(actualErrorMessage,expectedUserAccountName,"ERROR ::Invalid user");
+        extentTest.get().log(Status.PASS, "invalid User name entered successfully");
+        extentTest.get().log(Status.PASS, "invalid Password entered successfully");
+        extentTest.get().log(Status.PASS, "clicked on login button successfully");
+        extentTest.get().log(Status.PASS, "Expected error message matched with actual error message ");
+    }
+    @Test(priority = 4,description = "TC_004_Verify whetehr the user is able to click on 'Remember me' checkbox")
+    public void verify_Whether_User_Able_To_Click_On_RemememberMe_CheckBox(){
+        login = new LoginPage(driver);
+        login.clickOnRememberMeCheckBox();
+        extentTest.get().log(Status.PASS, "clicked on CheckBox successfully");
+        login.rememberMeCheckBoxIsSelected();
+        extentTest.get().log(Status.PASS, "CheckBox  selected successfully");
+        Assert.assertTrue(login.rememberMeCheckBoxIsSelected());
+        extentTest.get().log(Status.PASS, "Assertion True for checkbox selected ");
+    }
 }

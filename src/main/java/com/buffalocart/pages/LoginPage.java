@@ -21,10 +21,13 @@ public class LoginPage extends TestHelperUtility {
     @FindBy(id = _userName) private WebElement username;
     private final String _password="password";
     @FindBy(id=_password) private WebElement password;
-    private final String _rememberMeCheckBox="//div[@class='checkbox']";
+    private final String _rememberMeCheckBox="//div[@class='checkbox']//input[@type='checkbox']";
     @FindBy(xpath = _rememberMeCheckBox) private WebElement rememberMeCheckBox;
     private final String _loginButton="//button[@type='submit' and @class='btn btn-primary']";
     @FindBy(xpath =_loginButton) private WebElement loginButton;
+    private final String _errorMessage="//span[@class='help-block']";
+    @FindBy(xpath =_errorMessage) private WebElement errorMessage;
+
 
 
     /**User Actions**/
@@ -40,9 +43,16 @@ public class LoginPage extends TestHelperUtility {
     public void clickOnRememberMeCheckBox(){
         page.clickOnElement(rememberMeCheckBox);
     }
+    public boolean rememberMeCheckBoxIsSelected(){
+     return page.isSelected(rememberMeCheckBox);
+    }
+
     public HomePage clickOnLoginButton(){
         page.clickOnElement(loginButton);
         return new HomePage(driver);
+    }
+    public String getErrorMessage(){
+        return   page.getElementText(errorMessage);
     }
 
 }
