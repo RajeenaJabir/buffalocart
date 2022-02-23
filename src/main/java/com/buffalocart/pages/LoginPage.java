@@ -27,6 +27,8 @@ public class LoginPage extends TestHelperUtility {
     @FindBy(xpath =_loginButton) private WebElement loginButton;
     private final String _errorMessage="//span[@class='help-block']";
     @FindBy(xpath =_errorMessage) private WebElement errorMessage;
+    private final String _forgotPassword="//a[@class='btn btn-link']";
+    @FindBy(xpath = _forgotPassword) private WebElement forgotPassword;
 
 
 
@@ -54,5 +56,8 @@ public class LoginPage extends TestHelperUtility {
     public String getErrorMessage(){
         return   page.getElementText(errorMessage);
     }
-
+    public ResetPage clickOnForgotPassword(){
+        page.clickOnElement(forgotPassword);
+        return new ResetPage(driver);
+    }
 }

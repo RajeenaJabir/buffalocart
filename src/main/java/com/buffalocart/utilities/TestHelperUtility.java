@@ -5,4 +5,5 @@ public class TestHelperUtility {
     public PageUtility page = new PageUtility();
     public TableUtility table = new TableUtility();
     public WaitUtility wait = new WaitUtility();
+    public DateUtility date=new DateUtility();
 }

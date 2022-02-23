@@ -7,7 +7,9 @@ import com.buffalocart.automationcore.Base;
 import com.buffalocart.listeners.TestListeners;
 import com.buffalocart.pages.HomePage;
 import com.buffalocart.pages.LoginPage;
+import com.buffalocart.pages.ResetPage;
 import com.buffalocart.utilities.ExcelUtility;
+import org.apache.commons.logging.Log;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,6 +19,7 @@ import java.util.List;
 public class LoginPageTest extends Base {
     LoginPage login;
     HomePage home;
+    ResetPage reset;
     ExcelUtility excel = new ExcelUtility();
     ThreadLocal<ExtentTest> extentTest = TestListeners.getTestInstance();
 
@@ -75,5 +78,22 @@ public class LoginPageTest extends Base {
         extentTest.get().log(Status.PASS, "CheckBox  selected successfully");
         Assert.assertTrue(login.rememberMeCheckBoxIsSelected());
         extentTest.get().log(Status.PASS, "Assertion True for checkbox selected ");
+    }
+    @Test(priority=5,description = "TC_005_Verify error meesage displyed on  Reset Password page with invalid email id")
+    public void Verify_Error_Meesage_Displyed_On_Reset_Password_page_with_invalid_email_id(){
+        login =new LoginPage(driver);
+        List<List<String>> data=excel.excelDataReader("ResetPage");
+        reset=login.clickOnForgotPassword();
+        extentTest.get().log(Status.PASS, "clicked on Forgot Password successfully");
+        String emailid=data.get(1).get(1);
+        reset.enterInvalidEmailId(emailid);
+        extentTest.get().log(Status.PASS, "Invalid Email Id entered successfully");
+        reset.clickOnSendPasswordResetLinkButton();
+        extentTest.get().log(Status.PASS, "clicked on resend password button successfully");
+        String actualResetMessage= reset.getInvalidEmailResetMessage();
+        extentTest.get().log(Status.PASS, "Invalid message received successfully");
+        String expectedResetMessage=data.get(1).get(2);
+        Assert.assertEquals(actualResetMessage,expectedResetMessage,"ERROR ::Message Mismatch");
+        extentTest.get().log(Status.PASS, "Expected error message matched with actual error message ");
     }
 }
