@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TableUtility {
-    public static List<ArrayList<String>> get_Dynamic_TwoDimension_TablElemnts(List<WebElement> rowItems, List<WebElement> columnItems)
+    public  List<ArrayList<String>> get_Dynamic_TwoDimension_TablElemnts(List<WebElement> rowItems, List<WebElement> columnItems)
     {
         int rSize=rowItems.size()-1;
         int colnmSize=columnItems.size();

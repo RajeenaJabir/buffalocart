@@ -94,11 +94,4 @@ public class LoginPageTest extends Base {
         Assert.assertEquals(actualResetMessage,expectedResetMessage,"ERROR ::Message Mismatch");
         extentTest.get().log(Status.PASS, "Expected error message matched with actual error message ");
     }
-    @DataProvider(name = "AdminCredentials")
-    public Object[][] adminCredentialsData() {
-        Object data[][] = new Object[1][2];
-        data[0][0] = "admin";
-        data[0][1] = "123456";
-        return data;
-    }
 }

@@ -35,6 +35,7 @@ public class UserManagementPage extends TestHelperUtility {
     /**User action methods**/
 
     public void clickOnUserManagementTab() {
+       // wait.waitForElementToBeVisible(driver, _userManagementAllTabs, WaitUtility.LocatorType.Xpath);
         page.clickOnElement(userManagementTab);
     }
     public List<String> getAllUserSubManagementTab() {
@@ -46,7 +47,7 @@ public class UserManagementPage extends TestHelperUtility {
         return subTabValues;
     }
     public UsersPage selectTabFromUserManagement(String userText) {
-        wait.waitForElementToBeVisible(driver, _userManagementAllTabs, WaitUtility.LocatorType.Xpath);
+        wait.waitForElementToBeVisible(driver, _userMgmtTabs2, WaitUtility.LocatorType.Xpath);
         for (int j = 0; j < userMgmtTabs2.size(); j++) {
             String value=userMgmtTabs2.get(j).getText();
             if (value.equals(userText)) {
