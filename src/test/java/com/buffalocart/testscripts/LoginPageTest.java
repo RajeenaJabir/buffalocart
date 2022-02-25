@@ -2,14 +2,12 @@ package com.buffalocart.testscripts;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.TestListener;
 import com.buffalocart.automationcore.Base;
 import com.buffalocart.listeners.TestListeners;
 import com.buffalocart.pages.HomePage;
 import com.buffalocart.pages.LoginPage;
 import com.buffalocart.pages.ResetPage;
 import com.buffalocart.utilities.ExcelUtility;
-import org.apache.commons.logging.Log;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -95,5 +93,12 @@ public class LoginPageTest extends Base {
         String expectedResetMessage=data.get(1).get(2);
         Assert.assertEquals(actualResetMessage,expectedResetMessage,"ERROR ::Message Mismatch");
         extentTest.get().log(Status.PASS, "Expected error message matched with actual error message ");
+    }
+    @DataProvider(name = "AdminCredentials")
+    public Object[][] adminCredentialsData() {
+        Object data[][] = new Object[1][2];
+        data[0][0] = "admin";
+        data[0][1] = "123456";
+        return data;
     }
 }

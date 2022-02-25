@@ -53,4 +53,24 @@ public class HomePageTest extends Base {
         data[0][1] = "123456";
         return data;
     }
+    @Test(priority = 3,dataProvider ="AdminCredentials",description ="TC_008_Verify whether user is navigating to login page by clicking on Sign out button")
+    public void  verify_Whether_User_Is_Navigating_To_Login_Page_By_Clicking_On_Sign_Out_Button(String adminName,String pswd){
+        extentTest.get().assignCategory("Smoke");
+        login = new LoginPage(driver);
+        List<List<String>> data = excel.excelDataReader("HomePage");
+        login.enterUserName(adminName);
+        extentTest.get().log(Status.PASS, "User name entered successfully");
+        login.enterPassword(pswd);
+        extentTest.get().log(Status.PASS, "Password entered successfully");
+        home = login.clickOnLoginButton();
+        extentTest.get().log(Status.PASS, "clicked on login button successfully");
+        home.clickOnEndTourButton();
+        extentTest.get().log(Status.PASS, "clicked on EndTour button successfully");
+        String dropdown=data.get(1).get(4);
+        login=home.clickOnUserAccountName(dropdown);
+        extentTest.get().log(Status.PASS, "clicked on userAccount Name successfully");
+        String option=data.get(1).get(3);
+        login=home.selectFromDropDownForSignOut(option);
+        extentTest.get().log(Status.PASS, "clicked on SignOut button successfully");
+    }
 }

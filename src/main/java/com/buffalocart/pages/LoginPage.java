@@ -17,22 +17,30 @@ public class LoginPage extends TestHelperUtility {
     }
 
     /**Page Elements**/
+
     private final String _userName="username";
     @FindBy(id = _userName) private WebElement username;
+
     private final String _password="password";
     @FindBy(id=_password) private WebElement password;
+
     private final String _rememberMeCheckBox="//div[@class='checkbox']//input[@type='checkbox']";
     @FindBy(xpath = _rememberMeCheckBox) private WebElement rememberMeCheckBox;
+
     private final String _loginButton="//button[@type='submit' and @class='btn btn-primary']";
     @FindBy(xpath =_loginButton) private WebElement loginButton;
+
     private final String _errorMessage="//span[@class='help-block']";
     @FindBy(xpath =_errorMessage) private WebElement errorMessage;
+
     private final String _forgotPassword="//a[@class='btn btn-link']";
     @FindBy(xpath = _forgotPassword) private WebElement forgotPassword;
 
+    private final String _endTourButton = "//button[@class='btn btn-default btn-sm']";
+    @FindBy(xpath=_endTourButton) private WebElement endTourButton;
 
+    /**User action methods**/
 
-    /**User Actions**/
     public String getLoginPageTitle() {
       return   page.getPageTitle(driver);
     }
@@ -51,7 +59,7 @@ public class LoginPage extends TestHelperUtility {
 
     public HomePage clickOnLoginButton(){
         page.clickOnElement(loginButton);
-        return new HomePage(driver);
+        return  new HomePage(driver);
     }
     public String getErrorMessage(){
         return   page.getElementText(errorMessage);
@@ -60,4 +68,5 @@ public class LoginPage extends TestHelperUtility {
         page.clickOnElement(forgotPassword);
         return new ResetPage(driver);
     }
+
 }

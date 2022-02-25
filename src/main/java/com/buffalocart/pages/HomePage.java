@@ -31,7 +31,22 @@ public class HomePage extends TestHelperUtility {
     private final String _dateDisplayed="//div[@class='m-8 pull-left mt-15 hidden-xs']/strong";
     @FindBy(xpath = _dateDisplayed) private WebElement dateDisplayed;
 
-    /**User Actions**/
+    private final String _userAccountName = "//a[@class='dropdown-toggle']";
+    @FindBy(xpath = _userAccountName) private WebElement userAccountName;
+
+    private final String _signOutButton = "//div[@class='pull-right']/a[@class='btn btn-default btn-flat']";
+    @FindBy(xpath = _signOutButton) private WebElement signOutButton;
+
+    private final String _endTourButton = "//button[@class='btn btn-default btn-sm']";
+    @FindBy(xpath = _endTourButton) private WebElement endTourButton;
+
+    private final String _dropdownButton = "//div[@class='navbar-custom-menu']";
+    @FindBy(xpath =_dropdownButton) private List<WebElement> dropdownButton;
+
+    private final String _signOutOptions = "//li[@class='user-footer']";
+    @FindBy(xpath = _signOutOptions) private List<WebElement> signOutOptions;
+
+    /**User Actions Methods**/
 
     public String getUserAccountName(){
         String uname = page.getElementText(userName);
@@ -46,4 +61,36 @@ public class HomePage extends TestHelperUtility {
     public String getSystemDate(){
         return date.getDateOfSystem();
     }
+
+    public void clickOnUserAccountName() {
+        page.clickOnElement(userName);
+    }
+
+    public void clickOnEndTourButton() {
+        page.clickOnElement(endTourButton);
+    }
+
+    public LoginPage clickOnUserAccountName(String text) {
+        for (int i = 0; i < dropdownButton.size(); i++) {
+            String value = dropdownButton.get(i).getText();
+            if (value.equals(text)) {
+                page.clickOnElement(dropdownButton.get(i));
+                break;
+            }
+        }
+        return new LoginPage(driver);
+    }
+
+    public LoginPage selectFromDropDownForSignOut(String text) {
+        for (int i = 0; i < signOutOptions.size(); i++) {
+            String value = signOutOptions.get(i).getText();
+            if (value.equals(text)) {
+                page.clickOnElement(signOutOptions.get(i));
+                break;
+            }
+        }
+        return new LoginPage(driver);
+    }
+
 }
+
