@@ -19,7 +19,9 @@ public class TableUtility {
             for (int j = 0; j < columnList.length; j++) {
                 columnList[j] = columnItems.get(x).getText();
                 x++;
+               //  gridData.addAll(columnList[j]);
             }
+         //   x++;
             gridData.add(new ArrayList<String>(Arrays.asList(columnList)));
         }
         return gridData;

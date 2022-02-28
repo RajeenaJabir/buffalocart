@@ -60,10 +60,10 @@ public class UsersPageTest extends Base {
     @Test(priority =1,description = "TC_011_Verify user search with valid data")
     public void verify_User_Search_With_Valid_Data(){
         login = new LoginPage(driver);
-        List<List<String>> dataLoginPage=excel.excelDataReader("LoginPage");
-        String uname=dataLoginPage.get(1).get(1);
+        List<List<String>> dataLoginPage = excel.excelDataReader("LoginPage");
+        String uname = dataLoginPage.get(1).get(1);
         login.enterUserName(uname);
-        String psd=dataLoginPage.get(1).get(2);
+        String psd = dataLoginPage.get(1).get(2);
         login.enterPassword(psd);
         home = login.clickOnLoginButton();
         home.clickOnEndTourButton();
@@ -71,9 +71,20 @@ public class UsersPageTest extends Base {
         userManagement.clickOnUserManagementTab();
         extentTest.get().log(Status.PASS, "Clicked on user management Tab successfully");
         List<List<String>> dataUserManagementPage = excel.excelDataReader("UserManagementPage");
-        String use=dataUserManagementPage.get(2).get(0);
-        users =userManagement.selectTabFromUserManagement(use);
-        List<List<String>> dataUserPage=excel.excelDataReader("UsersPage");
-
+        String use = dataUserManagementPage.get(2).get(0);
+        users = userManagement.selectTabFromUserManagement(use);
+        List<List<String>> dataUsersPage = excel.excelDataReader("UsersPage");
+        String searchText = dataUsersPage.get(1).get(0);
+        users.enterTextToSearchField(searchText);
+        extentTest.get().log(Status.PASS, "Search Data entered successfully");
+        List<String> actualResult=users.searchValidData(searchText);
+        List<String> expectedResult = new ArrayList<>();
+        expectedResult.add(dataUsersPage.get(1).get(0));
+        expectedResult.add(dataUsersPage.get(1).get(1));
+        expectedResult.add(dataUsersPage.get(1).get(2));
+        expectedResult.add(dataUsersPage.get(1).get(3));
+        expectedResult.add(dataUsersPage.get(1).get(4));
+        Assert.assertEquals(actualResult,expectedResult,"ERROR ::Invalid data");
+        extentTest.get().log(Status.PASS, "Actual and Expected user detailes matched");
     }
 }

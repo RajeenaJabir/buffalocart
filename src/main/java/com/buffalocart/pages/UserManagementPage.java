@@ -35,7 +35,6 @@ public class UserManagementPage extends TestHelperUtility {
     /**User action methods**/
 
     public void clickOnUserManagementTab() {
-       // wait.waitForElementToBeVisible(driver, _userManagementAllTabs, WaitUtility.LocatorType.Xpath);
         page.clickOnElement(userManagementTab);
     }
     public List<String> getAllUserSubManagementTab() {
